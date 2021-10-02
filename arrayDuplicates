@@ -1,6 +1,8 @@
 package practice;
 
 import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class ArrayDuplicates {
@@ -8,9 +10,10 @@ public class ArrayDuplicates {
 	public static void main(String[] args) {
 		//Given an integer array nums, 
 		//return true if any value appears at least twice in the array, and return false if every element is distinct.
-		int arr[] = {39,6,2, 1, -10, 29, 3, 16};
+		int arr[] = {3,6,2, 1, 10, 29, 3, 6};
 		returnifDuplicatesExist(arr);
 		returnifDuplicatesExist2(arr);
+		returnifDuplicatesExist3(arr);
 	}
 	
 	public static void returnifDuplicatesExist(int nums[]) {
@@ -32,6 +35,24 @@ public class ArrayDuplicates {
 				System.out.println("Duplicates found");
 				break;
 			}
+		}
+	}
+	
+	//using hashtable to print duplicate elements
+	public static void returnifDuplicatesExist3(int nums[]) {
+		Hashtable<Integer, Integer> newTable = new Hashtable<>();
+		for(int i = 0; i < nums.length; i++) {
+			Integer count = newTable.get(nums[i]);
+			if(count == null)
+				newTable.put(nums[i], 1);
+			else
+				newTable.put(nums[i], ++count);	
+		}
+		
+		Set<Entry<Integer, Integer>> newSet = newTable.entrySet();
+		for(Entry<Integer, Integer> item : newSet) {
+			if(item.getValue() > 1)
+			 System.out.println("Duplicates found, the element is " + item.getKey() + " and it's repeated for " + item.getValue() + " times");
 		}
 	}
 }
