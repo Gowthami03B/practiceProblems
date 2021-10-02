@@ -1,0 +1,37 @@
+package practice;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class ArrayDuplicates {
+	
+	public static void main(String[] args) {
+		//Given an integer array nums, 
+		//return true if any value appears at least twice in the array, and return false if every element is distinct.
+		int arr[] = {39,6,2, 1, -10, 29, 3, 16};
+		returnifDuplicatesExist(arr);
+		returnifDuplicatesExist2(arr);
+	}
+	
+	public static void returnifDuplicatesExist(int nums[]) {
+//		time complexity - O(N^2)
+		Set<Integer> newset = new HashSet<>();
+		for(int i = 0; i < nums.length; i++) {
+			newset.add(nums[i]);
+		}
+		if(newset.size() < nums.length)
+			System.out.println("Duplicates found");
+		else
+			System.out.println("No Duplicates");
+	}
+	
+	public static void returnifDuplicatesExist2(int nums[]) {
+		Set<Integer> newset = new HashSet<>();
+		for(int i = 0; i < nums.length; i++) {
+			if(newset.add(nums[i]) == false) { //add method of hash set returns false if we try to add duplicate element.
+				System.out.println("Duplicates found");
+				break;
+			}
+		}
+	}
+}
