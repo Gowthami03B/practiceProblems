@@ -15,7 +15,7 @@ public class containerWithMostWater {
 		System.out.println(c.maxAreaOptimal(val));
 	}
 	
-	public int maxAreaHighTime(int[] height) {
+	public int maxAreaHighTime(int[] height) { //time complexity - O(N2), space complexity - O(1)
         int area = 0;
         for(int i = 0; i < height.length ; i++){
             for(int j = i+1; j < height.length ; j++){
@@ -24,8 +24,8 @@ public class containerWithMostWater {
         }
         return area;
     }
-	
-	public int maxAreaOptimal(int[] height) {
+	 
+	public int maxAreaOptimal(int[] height) { //time complexity - O(N), space complexity - O(1) (NO EXTRA SPACE NEEDED)
         int area = 0;
         int start = 0;
         int end = height.length - 1;
