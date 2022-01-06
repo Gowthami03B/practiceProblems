@@ -1,9 +1,11 @@
 class Solution:
     def kthFactor(self, n: int, k: int) -> int:
-        factors = []
-        for i in range(1,n+1):
-            if(n%i == 0):
-                factors.append(i)
-        # print(factors)
-        return factors[k-1] if k <= len(factors) else -1
+        for x in range(1, n // 2 + 1):
+            if n % x == 0:
+                k -= 1
+                if k == 0:
+                    return x
+        
+        return n if k == 1 else -1
+            
                 
