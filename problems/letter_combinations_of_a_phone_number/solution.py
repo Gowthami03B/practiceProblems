@@ -1,35 +1,33 @@
 class Solution:
-    def letterCombinations(self, digits: str) -> List[str]:
-        
+    def letterCombinations(self, digits: str):
+        # If the input is empty, immediately return an empty answer array
         if len(digits) == 0:
             return []
-        
-        lookup = {
-            "2": ["a", "b","c"],
-            "3": ["d", "e","f"],
-            "4": ["g", "h","i"],
-            "5": ["j", "k","l"],
-            "6": ["m", "n","o"],
-            "7": ["p", "q","r", "s"],
-            "8": ["t", "u","v"],
-            "9": ["w", "x","y", "z"]            
-        }
-        
-        letters = []
-        for digit in digits:
-            letters.append(lookup[digit])
-            
-        while len(letters) > 1:
-            list1 = letters.pop()
-            list2 = letters.pop()
-            
-            combinations = []
-            for i in list2:
-                for j in list1:
-                    combinations.append(i + j)
-                    
-            letters.append(combinations)
-        
-        return letters[0]
-            
-                
+
+        # Map all the digits to their corresponding letters
+        letters = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl",
+                   "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+
+        def backtrack(index, path):
+            # If the path is the same length as digits, we have a complete combination
+            if len(path) == len(digits):
+                combinations.append("".join(path))
+                print("Returning from base condition\n")
+                return  # Backtrack
+
+            # Get the letters that the current digit maps to, and loop through them
+            possible_letters = letters[digits[index]]
+            print("possible_letters is  %s \n" % (possible_letters))
+            for letter in possible_letters:
+                # Add the letter to our current path
+                path.append(letter)
+                print("path is  %s"%(path))
+                # Move on to the next digit
+                backtrack(index + 1, path)
+                # Backtrack by removing the letter before moving onto the next
+                path.pop()
+
+        # Initiate backtracking with an empty path and starting index of 0
+        combinations = []
+        backtrack(0, [])
+        return combinations
