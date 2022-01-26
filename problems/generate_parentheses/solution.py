@@ -1,25 +1,17 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        
-        def generate(path, count_open, count_close):
-            
-            if count_open == 0 and count_close == 0:
-                combinations.append(''.join(path))
+        ans = []
+        def backtrack(S = [], left = 0, right = 0):
+            if len(S) == 2 * n:
+                ans.append("".join(S))
                 return
-            
-            if count_open > 0:
-                path.append('(')
-                generate(path, count_open - 1, count_close)
-                path.pop()
-            
-            if count_close > 0:
-                if count_open < count_close:
-                    path.append(')')
-                    generate(path, count_open, count_close - 1)
-                    path.pop()  
-        
-        combinations = []
-        generate([], n, n)
-        return combinations
-        
-        
+            if left < n:
+                S.append("(")
+                backtrack(S, left+1, right)
+                S.pop()
+            if right < left:
+                S.append(")")
+                backtrack(S, left, right+1)
+                S.pop()
+        backtrack()
+        return ans
