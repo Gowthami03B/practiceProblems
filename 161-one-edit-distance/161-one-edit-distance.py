@@ -1,14 +1,6 @@
 class Solution:
     def isOneEditDistance(self, s: str, t: str) -> bool:
-        if not s and not t:
-            return False
-        elif not s and len(t) == 1:
-            return True
-        elif not t and len(s) == 1:
-            return True
-        if abs(len(s) - len(t)) > 1:
-            return False
-        if s == t:
+        if abs(len(s) - len(t)) > 1 or s == t:
             return False
         i = 0;
         while(i < len(s) and i < len(t)):
