@@ -10,11 +10,17 @@ class Solution:
 #                 return key
 #         return -1
     
-        degree = [0 for i in range(len(edges) + 2)]
-        for a,b in edges:
-            degree[a] += 1
-            degree[b] += 1
-        for i in range(1, len(degree)):
-            if degree[i] == len(edges):
-                return i
+        # degree = [0 for i in range(len(edges) + 2)]
+        # for a,b in edges:
+        #     degree[a] += 1
+        #     degree[b] += 1
+        # for i in range(1, len(degree)):
+        #     if degree[i] == len(edges):
+        #         return i
+        # return -1
+        
+        if edges[0][0] in edges[1]:
+            return edges[0][0]
+        else:
+            return edges[0][1]
         return -1
