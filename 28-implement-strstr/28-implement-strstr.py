@@ -7,8 +7,8 @@ class Solution:
         if haystack == needle:
             return 0
         n = len(needle)
-        for i in range(len(haystack) - n + 1):
-            if haystack[i:i+n] == needle:
+        for i in range(len(haystack) - n + 1):#we stop at len of haystack -needle
+            if haystack[i:i+n] == needle: #if substring in haystack from i to i+needle len == needle, then return i
                 return i
         return -1
             
