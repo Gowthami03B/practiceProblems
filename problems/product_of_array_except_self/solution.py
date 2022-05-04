@@ -1,12 +1,69 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        suffix = 1
+        """
+        [1,2,3,4]
+        1 - 2,3,4
+        2 - 1,3,4
+        3 - 1,2,4
+        4 - 1,2,3
+        
+        dp[0] = prod of all other elements - 2*3*4
+        dp[n] = prod of all elements until that - 1*2*3
+        dp[1] = dp[1-1] * dp[1+1:n]
+        dp[2] = (nums[2-1]*dp[1-1]) * (dp[1+1:n]/nums[2])
+        ...
+        dp[m] = (nums[m-1] * dp[m-1])%nums[2]
+        """
+        #with division and dp
+        # n = len(nums)
+        # if n == 0:
+        #     return []
+        # if n == 1:
+        #     return nums
+        # dp = [1] * n
+        # #base case
+        # for i in range(1,n):
+        #     dp[0] *= nums[i]
+        # for i in reversed(range(n-1)):
+        #     dp[n-1] *= nums[i]
+        # # print(dp)
+        # for i in range(1,n-1):
+        #     if nums[i] != 0:
+        #         dp[i] = (nums[i-1] * dp[i-1])//nums[i]
+        #     else:
+        #         dp[i] = nums[i-1] * dp[i-1]
+        # return dp
+    
+        #dp without division, space complexity - O(n)
+        # n = len(nums)
+        # if n == 0:
+        #     return []
+        # if n == 1:
+        #     return nums
+        # fwd, bwd = [0] * n, [0] * n
+        # fwd[0] = 1
+        # bwd[n-1] = 1
+        # for i in range(1,n):
+        #     fwd[i] = fwd[i-1]* nums[i-1]
+        # for i in reversed(range(n-1)):
+        #     bwd[i] = bwd[i+1]* nums[i+1]
+        # print(fwd, bwd)
+        # return [fwd[i]* bwd[i] for i in range(len(fwd))]
+    
+        #space complexity O(1)
         n = len(nums)
-        ans = []
-        ans.append(suffix)
-        for i in range(1,n):
-            ans.append(nums[i - 1] * ans[i - 1])
+        if n == 0:
+            return []
+        if n == 1:
+            return nums
+        prod = 1
+        res = [1] * n
+        for i in range(0,n):
+            res[i] = prod
+            prod *= nums[i]
+        print(res)
+        prod = 1
         for i in reversed(range(n)):
-            ans[i] = ans[i] * suffix
-            suffix *= nums[i]
-        return ans
+            res[i] *= prod
+            prod *= nums[i]
+        return res
