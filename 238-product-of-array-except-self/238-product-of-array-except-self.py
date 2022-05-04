@@ -34,18 +34,36 @@ class Solution:
         #         dp[i] = nums[i-1] * dp[i-1]
         # return dp
     
-        #dp without division
+        #dp without division, space complexity - O(n)
+        # n = len(nums)
+        # if n == 0:
+        #     return []
+        # if n == 1:
+        #     return nums
+        # fwd, bwd = [0] * n, [0] * n
+        # fwd[0] = 1
+        # bwd[n-1] = 1
+        # for i in range(1,n):
+        #     fwd[i] = fwd[i-1]* nums[i-1]
+        # for i in reversed(range(n-1)):
+        #     bwd[i] = bwd[i+1]* nums[i+1]
+        # print(fwd, bwd)
+        # return [fwd[i]* bwd[i] for i in range(len(fwd))]
+    
+        #space complexity O(1)
         n = len(nums)
         if n == 0:
             return []
         if n == 1:
             return nums
-        fwd, bwd = [0] * n, [0] * n
-        fwd[0] = 1
-        bwd[n-1] = 1
-        for i in range(1,n):
-            fwd[i] = fwd[i-1]* nums[i-1]
-        for i in reversed(range(n-1)):
-            bwd[i] = bwd[i+1]* nums[i+1]
-        print(fwd, bwd)
-        return [fwd[i]* bwd[i] for i in range(len(fwd))]
+        prod = 1
+        res = [1] * n
+        for i in range(0,n):
+            res[i] = prod
+            prod *= nums[i]
+        print(res)
+        prod = 1
+        for i in reversed(range(n)):
+            res[i] *= prod
+            prod *= nums[i]
+        return res
