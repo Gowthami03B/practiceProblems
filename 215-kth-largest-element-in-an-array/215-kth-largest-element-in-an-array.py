@@ -6,10 +6,20 @@ class Solution:
         # print(heapq.nsmallest(k,nums),heapq.nsmallest(k,nums)[k-1])
         # print(heapq.nlargest(k,nums),heapq.nlargest(k,nums)[k-1])
         # return heapq.nlargest(k,nums)[k-1]
-        heap = []
-        for n in nums:
-            heappush(heap,-n)
-        for i in range(k):
-            res = heappop(heap)
-        return -res
+        
+        #Method 1
+        # heap = []
+        # for n in nums:
+        #     heappush(heap,-n)
+        # for i in range(k):
+        #     res = heappop(heap)
+        # return -res
     
+        #Method 2
+        heap, res = [], []
+        for n in nums:
+            heappush(heap,n)
+            if len(heap) > k:
+                heappop(heap)
+        return heap[0]
+            
