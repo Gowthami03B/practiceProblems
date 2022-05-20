@@ -1,15 +1,19 @@
 import heapq
-from collections import defaultdict
+from collections import Counter
 class Solution:
     def frequencySort(self, s: str) -> str:
-        charmap = defaultdict(int)
-        for c in s:
-            charmap[c] += 1
-        heap = []
-        for char, freq in charmap.items():
-            heapq.heappush(heap, (-freq,char))
+        charmap = Counter(s)
+        print(charmap)
+        # charmap = defaultdict(int)
+        # for c in s:
+        #     charmap[c] += 1
         res = ""
-        while heap:
-            freq, char = heapq.heappop(heap)
-            res += abs(freq) * char
+        for char, freq in charmap.most_common():
+            res += freq * char
+        # heap = []
+        # for char, freq in charmap.items():
+        #     heapq.heappush(heap, (-freq,char))
+        # while heap:
+        #     freq, char = heapq.heappop(heap)
+        #     res += abs(freq) * char
         return res
