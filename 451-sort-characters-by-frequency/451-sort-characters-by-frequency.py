@@ -9,6 +9,7 @@ class Solution:
         #     charmap[c] += 1
         res = ""
         for char, freq in charmap.most_common():
+            print(char, freq)
             res += freq * char
         # heap = []
         # for char, freq in charmap.items():
