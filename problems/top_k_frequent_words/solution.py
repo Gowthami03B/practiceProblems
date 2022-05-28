@@ -1,12 +1,18 @@
+import heapq
+from heapq import heappop, heappush
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
-        window = {}
-        for s in words:
-            if(s in window):
-                window[s] += 1
-            else:
-                window[s] = 1
-        sorted_dick = sorted(window.items(), key=lambda x: (-x[1], x[0]))
-        print(sorted_dick)
-        return [i[0] for i in sorted_dick][:k]
+        wordMap = Counter(words)
+        output = [x[0] for x in sorted(wordMap.items(), key=lambda kv:(-kv[1],kv[0]))[:k]]#gives a list sorted by words in frequency first and lexicographical next, selecting first k words
+        print(output)
+        heap, res = [],[]
+        for word, freq in wordMap.items():
+            heappush(heap, (-freq,word)) #constructing a max heap, heap also takes care of lexicographical order
+        print(heap)
+        for _ in range(k):
+            freq, word = heappop(heap) #pops the smallest element first or smallest lexicographical word
+            res.append(word)
             
+        return res
+        
+        
