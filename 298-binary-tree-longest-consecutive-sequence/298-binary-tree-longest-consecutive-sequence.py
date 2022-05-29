@@ -6,13 +6,17 @@
 #         self.right = right
 class Solution:
     def longestConsecutive(self, root: Optional[TreeNode]) -> int:
+        maxLen = 1
         def dfs(root,parent,currlen):
+            nonlocal maxLen
             if root is None:
                 return 0
             if parent and root.val == parent.val + 1:
                 currlen += 1
+                maxLen = max(maxLen, currlen)
             else:
                 currlen = 1
-            return max(currlen, dfs(root.left,root,currlen), dfs(root.right,root,currlen))
-        return dfs(root,None,0)
+            return max(dfs(root.left,root,currlen), dfs(root.right,root,currlen))
+        dfs(root,None,0)
+        return maxLen
         
