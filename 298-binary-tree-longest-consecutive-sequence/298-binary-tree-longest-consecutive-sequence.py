@@ -17,6 +17,6 @@ class Solution:
             else:
                 currlen = 1
             return max(dfs(root.left,root,currlen), dfs(root.right,root,currlen))
-        dfs(root,None,0)
+        dfs(root,None,1)
         return maxLen
         
