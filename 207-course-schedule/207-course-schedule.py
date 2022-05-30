@@ -5,38 +5,27 @@ class Solution:
         graph = defaultdict(list)
         indegree = [0 for _ in range(numCourses)]
         for course,prereq in prerequisites:
-            graph[prereq].append(course)
-            indegree[course] += 1
+            graph[prereq].append(course) #graph to adjacency list
+            indegree[course] += 1 #a course which is only in prerequisite list and not in course list has indegree 0
         print(graph, indegree)
-        queue = deque()
-        count = 0
+        queue = deque() #queue
+        count = 0 #keep note of explored courses
         visited = set()
         for i in range(len(indegree)):
-            if indegree[i] == 0 and i not in visited:
+            if indegree[i] == 0 and i not in visited: #if indegree is 0 and not visited
                 queue.append(i)
             
             while(queue):
                 course = queue.popleft()
                 if course in visited:
                     return
-                if indegree[course] == 0:
+                if indegree[course] == 0:#if indegree is 0, we can complete the course, hence inc count and add to visited
                     count += 1
                     visited.add(course)
-                    for course in graph[course]:
-                        # if course in graph:
-                            indegree[course] -= 1
-                            if indegree[course] == 0:
+                    for course in graph[course]: #for each dependent course 
+                            indegree[course] -= 1 #decrement indegree of dependent courses as we completed their prerequiste course
+                            if indegree[course] == 0:#if indegree is 0, we need to complete the course, hence add to queue
                                 queue.append(course)
                     
         return numCourses == count
-#         def topsort(prereq, coursePre=None):
-#             if prereq in visited:
-#                 return
-#             if prereq in graph:
-#                 topsort(graph[prereq])
-#             visited.add(prereq)
-#             courseOrder.append(prereq)
-            
-#         for prerequisite in graph.keys():
-#             topsort(prerequisite)
         
