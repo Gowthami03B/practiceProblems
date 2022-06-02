@@ -20,7 +20,7 @@ class Solution:
             if s[j] in tMap and sCurrMap[s[j]] == tMap[s[j]]:
                 curr += 1
             #once curr == count, i.e chars in s are in t
-            # Try and contract the window till the point where it ceases to be 'desirable'.
+            # while counts remain same, we are shrinking window size from the start character to see if we can explore smaller windows
             while i<=j and curr == count:
                 if (j-i+1) < minLength: #update minLength if we are at a new minLength only
                     minLength = j-i+1
