@@ -5,27 +5,10 @@ class Solution:
         if len(intervals) == 0:
             return 0
         roomsNeeded = []
-        heappush(roomsNeeded, intervals[0][1])
-        for interval in intervals[1:]:
-            if interval[0] >= roomsNeeded[0]:
-                heappop(roomsNeeded)
-            heappush(roomsNeeded, interval[1])
+        heappush(roomsNeeded, intervals[0][1]) #we push the end time of first meeting
+        for interval in intervals[1:]: #for all subsequent meetings
+            if interval[0] >= roomsNeeded[0]: #if next start interval is >= first element on heap, means the new interval can be scheduled in the same room, [4,8][10,12]
+                heappop(roomsNeeded) #hence we pop
+            heappush(roomsNeeded, interval[1]) #else we push the new interval with it's end time
         return len(roomsNeeded)
         
-    def minMeetingRoomsBruteForce(self, intervals: List[List[int]]) -> int:
-        intervals.sort()
-        roomsNeeded  = 0
-        if len(intervals) > 0:
-            roomsNeeded += 1
-            currMinEndTime = intervals[0][1]
-        for i in range(1,len(intervals)):
-            if intervals[i][0] < intervals[i-1][1] and intervals[i][0] >= currMinEndTime:
-                continue
-            elif intervals[i][0] < intervals[i-1][1] and intervals[i][0] < currMinEndTime:
-                roomsNeeded += 1
-                currMinEndTime = min(currMinEndTime, intervals[i-1][1])
-            else:
-                if roomsNeeded == 0:
-                    roomsNeeded += 1
-                continue
-        return 1 if roomsNeeded == 0 else roomsNeeded
