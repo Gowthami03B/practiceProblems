@@ -35,10 +35,10 @@ class Solution:
         for i in range(rows):
             for j in range(cols):
                 if matrix[i][j] == 0:
-                    rowsSet.add(i)
+                    rowsSet.add(i)#add to set
                     colsSet.add(j)
         
         for i in range(rows):
             for j in range(cols):
-                if i in rowsSet or j in colsSet:
+                if i in rowsSet or j in colsSet: #say we add [2,2] to set, that means [2,0], [2,1],[0,2],[1,2] must be set to 0 in a 3*3 matrix. that means if i in rowSet or j in colSet, mark matrix[i][j] to 0
                     matrix[i][j] = 0
