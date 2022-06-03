@@ -7,7 +7,7 @@ class NumArray:
         print(nums)
         
     def sumRange(self, left: int, right: int) -> int:
-        return self.nums[right] - self.nums[left-1] if left else self.nums[right]
+        return self.nums[right] - self.nums[left-1] if left else self.nums[right] #if left is 0, then nums[right] is ans, else total sum until right - all the sum before left which is left -1
 
 
 # Your NumArray object will be instantiated and called as such:
