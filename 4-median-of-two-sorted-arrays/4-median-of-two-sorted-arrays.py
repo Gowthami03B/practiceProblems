@@ -17,9 +17,8 @@ class Solution:
         """
         A,B = nums1, nums2
         m,n = len(nums1),len(nums2)
-        if m == n == 0:
-            return []
         totLen = m + n
+        
         #binary search on smaller array
         if n < m:
             A,B = B,A
@@ -27,19 +26,21 @@ class Solution:
         while True:
             mid = (l + r)//2
             j = (totLen//2) - mid - 2 #say total 13, 6 elements 1 half, mid of A is 1 (means 0 and 1 indices, 2 elements), 4 elements in B from 0,1,2,3 hence 6 - 1 - 2
-            Aleft = A[mid] if mid >= 0 else float('-inf')
-            Bleft = B[j] if j >= 0 else float('-inf')
-            Aright = A[mid + 1] if (mid + 1) < len(A) else float('inf')
+            #Aleft, Bleft are neg inf, and rights are inf, hence output can never be inf as we choose the max(lefts) and min(rights)
+            Aleft = A[mid] if mid >= 0 else float('-inf')  #it will be out of bound is mid < 0
+            Bleft = B[j] if j >= 0 else float('-inf') 
+            Aright = A[mid + 1] if (mid + 1) < len(A) else float('inf')#it will be out of bound is mid+1 > len(A)
             Bright = B[j+1] if (j + 1) < len(B) else float('inf')
             
+            #if left partition is as expected
             if Aleft <= Bright and Bleft <= Aright:
-                if totLen % 2:
-                    return min(Aright, Bright)
-                else:
+                if totLen % 2: #odd len, element is always on right side and min of right
+                    return min(Aright, Bright) 
+                else:#even len, so its last ele in left and 1st ele in right ie max of lefts, min of rights
                     return (max(Aleft, Bleft) + min(Aright , Bright))/2
-            elif Bleft > Aright:
+            elif Bleft > Aright:#expand left partition in A, to increase Aright
                 l = mid + 1
-            else:
+            else:#else shrink left
                 r = mid - 1
     
     #with space, use merge sort technique
