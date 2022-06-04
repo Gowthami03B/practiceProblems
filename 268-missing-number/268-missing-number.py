@@ -1,5 +1,19 @@
 class Solution:
-    def missingNumber(self, nums: List[int]) -> int:
+    def missingNumber1(self, nums: List[int]) -> int:
+        
+        #O(n2) time complexity - not acceptable
         for n in range(0, len(nums) + 1):
-            if n not in nums:
+            if n not in nums: #in operation in list is O(n)
                 return n
+            
+    def missingNumber(self, nums: List[int]) -> int:
+        nums.sort()
+        if nums[0] != 0:
+            return 0
+        if nums[-1] != len(nums):
+            return len(nums)
+        #O(n log n) time complexity - sorting
+        for i in range(1, len(nums)):
+            expected = nums[i-1] + 1
+            if nums[i] != expected:
+                return expected
