@@ -17,6 +17,8 @@ class Solution:
         """
         A,B = nums1, nums2
         m,n = len(nums1),len(nums2)
+        if m == n == 0:
+            return []
         totLen = m + n
         #binary search on smaller array
         if n < m:
