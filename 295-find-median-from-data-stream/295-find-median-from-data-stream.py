@@ -6,6 +6,7 @@ class MedianFinder:
         self.minHeap = [] #min heap to store large elements
         self.maxHeap = [] #max heap to store small elements
 
+        #cannot take abs as there will be negative numbers also
     def addNum(self, num: int) -> None:
         heappush(self.maxHeap, -1 * num)
         #check if elements in maxHeap > minHeap, then take max ele from maxheap and move to minheap
