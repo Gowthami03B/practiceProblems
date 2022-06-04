@@ -26,6 +26,7 @@ class Solution:
                 return num
             
     #we know that sum of numbers from 1to n is n(n+1)/2
+     #O(n) time complexity,fastest
     def missingNumber(self, nums: List[int]) -> int:
         n = len(nums) #0 has no value, hence sum can be take as for 5 numbers
         expectedSum = (n * (n+1))//2
