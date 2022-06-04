@@ -18,9 +18,16 @@ class Solution:
             if nums[i] != expected:
                 return expected
             
-    #O(n) time complexity
-    def missingNumber(self, nums: List[int]) -> int:
+    #O(n) time complexity, O(n) space
+    def missingNumberSet(self, nums: List[int]) -> int:
         num_set = set(nums)
         for num in range(len(nums) + 1):
             if num not in num_set: #O(1)- in operation on set is O(1)
                 return num
+            
+    #we know that sum of numbers from 1to n is n(n+1)/2
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums) #0 has no value, hence sum can be take as for 5 numbers
+        expectedSum = (n * (n+1))//2
+        actualSum = sum(nums)
+        return expectedSum - actualSum
