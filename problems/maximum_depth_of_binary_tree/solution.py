@@ -14,13 +14,7 @@ class Solution:
             # right = self.maxDepth(root.right)
             # print(root,left,right)
             # return max(left, right) + 1#plus 1 is for root
-            if root is None: 
-                return 0 
-            else: 
-                left_height = self.maxDepth(root.left) 
-                right_height = self.maxDepth(root.right) 
-                return max(left_height, right_height) + 1 
-        #BFS on a tree is level order traversal, BFS == queue
+        # BFS on a tree is level order traversal, BFS == queue
         # if root is None:
         #         return 0
         # queue = deque([root])
@@ -36,13 +30,27 @@ class Solution:
         #     levels += 1
         # return levels
         #iterative DFS - pre order traversal, root, left , right
-        # stack = [[root,1]]
-        # res = 0
-        # while(stack):
-        #     node, depth = stack.pop()
-        #     print(node, depth)
-        #     if node:
-        #         res = max(res, depth)
-        #         stack.append([node.right,depth+1])
-        #         stack.append([node.left,depth+1])
-        # return res
+#         stack = [[root,1]]
+#         res = 0
+#         while(stack):
+#             node, depth = stack.pop()
+#             print(node, depth)
+#             if node:
+#                 res = max(res, depth)
+#                 stack.append([node.right,depth+1])
+#                 stack.append([node.left,depth+1])
+#         return res
+    
+        if root is None:
+            return 0
+        queue = deque([root])
+        depth = 0
+        while(queue):
+            depth += 1# 9,5, depth = 1
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left) 
+                if node.right:
+                    queue.append(node.right)
+        return depth
