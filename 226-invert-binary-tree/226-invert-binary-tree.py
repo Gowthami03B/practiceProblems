@@ -18,7 +18,7 @@ class Solution:
             return root
     
     #iterative - add to queue, pop, invert, add subtrees and loop while queue
-    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    def invertTree1(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if root is None:
             return None
         queue = deque([root])
@@ -29,4 +29,15 @@ class Solution:
                 queue.append(current.left)
             if current.right:
                 queue.append(current.right)
+        return root
+    
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return
+
+        left = self.invertTree(root.left)
+        right = self.invertTree(root.right)
+
+        root.left = right
+        root.right = left
         return root
