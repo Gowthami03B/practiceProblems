@@ -11,7 +11,7 @@ class Solution:
             return inorder(root.left) + [root.val] + inorder(root.right) if root else []
         return inorder(root)
     
-    def kthSmallestRecursive1(self, root: Optional[TreeNode], k: int) -> int:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         res = []
         def inorder(root):
             if not root:
@@ -22,7 +22,7 @@ class Solution:
             return res
         return inorder(root)[k-1]
     
-    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+    def kthSmallestIterative(self, root: Optional[TreeNode], k: int) -> int:
         res, stack = [], []
         while stack or root:
             if root:
