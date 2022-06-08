@@ -13,9 +13,10 @@ class Solution:
                     visited.add(neighbour)
                     dfs(neighbour)
         
+        #start dfs
         for i in range(n):
-            if i not in visited:
-                connected += 1
+            if i not in visited:#if a node is not in visited
+                connected += 1 #increment connected and perform dfs on graph[node]
                 visited.add(i)
                 dfs(i)
                 
@@ -45,7 +46,7 @@ class Solution:
                     if neighbour not in visited:
                         queue.append(graph[neighbour])
                         visited.add(neighbour)
-            if not queue:
+            if not queue:#queue is empty, means one connected component traversal is coomplete, we check for other nodes and append to queue
                 connected += 1
                 for node in graph.keys():
                     if node not in visited:
