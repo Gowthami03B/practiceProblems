@@ -1,5 +1,27 @@
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        connected = 0
+        graph = collections.defaultdict(list)
+        visited = set()
+        for u,v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+        
+        def dfs(node):
+            for neighbour in graph[node]:
+                if neighbour not in visited:
+                    visited.add(neighbour)
+                    dfs(neighbour)
+        
+        for i in range(n):
+            if i not in visited:
+                connected += 1
+                visited.add(i)
+                dfs(i)
+                
+        return connected
+    
+    def countComponentsIterative(self, n: int, edges: List[List[int]]) -> int:
         #4, [[0,1],[0,2],[1,2]]; here 0-1-2 are connected and 3 is another node
         connected = 0
         graph = collections.defaultdict(list)
