@@ -15,13 +15,15 @@ class Solution:
         #     return res
         # return dfs(root)
     
-        res,stack = [],[root]
-        while stack:
-            root = stack.pop()
+        if not root:
+            return []
+        stack , res = [],[]
+        while stack or root:
             if root:
                 res.append(root.val)
-                if root.right:
-                    stack.append(root.right)
-                if root.left:
-                    stack.append(root.left)
+                stack.append(root)
+                root = root.left
+            else:
+                node = stack.pop()
+                root = node.right
         return res
