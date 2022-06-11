@@ -14,7 +14,8 @@ class Solution:
         #         res.append(root.val)
         #     return res
         # return dfs(root)
-    
+        if not root:
+            return []
         res , stack = [],[root]
         while stack:
             root = stack.pop()
