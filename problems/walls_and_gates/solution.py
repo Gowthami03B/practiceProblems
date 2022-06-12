@@ -1,29 +1,18 @@
 class Solution:
-    def wallsAndGates(self, rooms: List[List[int]]) -> None:
-        rows, cols = len(rooms), len(rooms[0])
-        q = deque()
-        visit = set()
-        for r in range(rows):
-            for c in range(cols):
-                if(rooms[r][c] == 0):
-                    q.append([r,c])
-                    visit.add((r,c))
-
-        def addRoom(r,c):
-            if(r < 0 or r == rows or c < 0 or c == cols or (r,c) in visit or rooms[r][c] == -1):
-                return
-            visit.add((r,c))
-            q.append([r,c])
-
-        dist = 0
-        while q:
-            n = len
-            for i in range(len(q)):
-                r,c = q.popleft()
-                addRoom(r + 1, c)
-                addRoom(r , c + 1)
-                addRoom(r - 1, c)
-                addRoom(r , c - 1)
-                rooms[r][c] = dist
-            dist+=1  
-        
+    def wallsAndGates(self, grid: List[List[int]]) -> None:
+        #using BFS will make us find all rooms at distance 1 and distance+1 and so on
+        #search from gates instead of rooms
+        rows, cols = len(grid), len(grid[0])
+        queue = collections.deque()
+        dir = [[1,0],[0,1],[-1,0],[0,-1]]
+        for i in range(rows):
+            for j in range(cols):
+                if grid[i][j] == 0:
+                    queue.append([i,j])#add all gates to queue
+        while(queue):#start BFS from all gates simultaneously
+            r,c = queue.popleft()
+            for dr,dc in dir:
+                nr,nc = r+dr, c+dc
+                if nr in range(rows) and nc in range(cols) and grid[nr][nc] > grid[r][c] + 1:#if curr dist is > nearest dist from gate, update dist
+                    grid[nr][nc] = grid[r][c] + 1#+1 from nearest gate
+                    queue.append([nr,nc])
