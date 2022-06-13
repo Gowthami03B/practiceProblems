@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+    def sumNumbers1(self, root: Optional[TreeNode]) -> int:
         #bad approach - string concatenation and conversion to int
         # res = []
         # def dfs(root, path):
@@ -33,7 +33,7 @@ class Solution:
         dfs(root, 0)
         return res
     
-    def sumNumbersIterative(self, root: Optional[TreeNode]) -> int:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
         sumTotal = 0
         stack = [(root,0)]
         while(stack):
