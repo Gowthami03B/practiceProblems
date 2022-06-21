@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+    def widthOfBinaryTreeBFS(self, root: Optional[TreeNode]) -> int:
         #BFS, calculate index of each node
         if root is None:
             return 0
@@ -25,4 +25,22 @@ class Solution:
             maxwidth = max(maxwidth,index - level_head_index + 1)#we traverse through the length of the list and find difference between right most node and first node
         return maxwidth
     
-    
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        #BFS, calculate index of each node
+        if root is None:
+            return 0
+        maxwidth = 0
+        first_col_index = {}
+        def dfs(root, depth, index):
+            nonlocal maxwidth
+            if root is None:
+                return 
+            if depth not in first_col_index:
+                first_col_index[depth] = index
+                
+            maxwidth = max(maxwidth, index - first_col_index[depth] + 1)
+            dfs(root.left, depth + 1, 2*index)
+            dfs(root.right, depth + 1, 2*index + 1)
+        
+        dfs(root, 0, 0)
+        return maxwidth
