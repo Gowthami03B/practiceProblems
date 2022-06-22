@@ -36,7 +36,7 @@ class Solution:
             if root is None:
                 return 
             if depth not in first_col_index:
-                first_col_index[depth] = index
+                first_col_index[depth] = index#if depth is not in map, then add, and it would be the first node, bcs we always travel left most node first in any level
                 
             maxwidth = max(maxwidth, index - first_col_index[depth] + 1)
             dfs(root.left, depth + 1, 2*index)
