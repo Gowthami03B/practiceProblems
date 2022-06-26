@@ -9,4 +9,12 @@ class Solution:
         while head:
             values.append(head.val)
             head = head.next
-        return values == values[::-1]
+        # return values == values[::-1]
+        i,j = 0, len(values) - 1
+        while(i < j):
+            if values[i] == values[j]:
+                i += 1
+                j -= 1
+            else:
+                return False
+        return True
