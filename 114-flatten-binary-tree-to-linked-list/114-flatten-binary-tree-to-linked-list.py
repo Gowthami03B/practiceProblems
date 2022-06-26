@@ -9,16 +9,18 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
+        #instead of constructing from top where u need to set the current node's right and modify the tree, why don't you start from bottom?
+        #then it becomes post order traversal and you won't disturb the tree when you set the right of current node to prev node
         prev = None
-        def dfs(root):# 3, prev 3, 3.right = None
+        def dfs(root):
             nonlocal prev
             if root is None:
                 return 
-            dfs(root.right)
-            dfs(root.left) #2 2.right = 3
-            root.right = prev
-            root.left = None 
-            prev = root  #prev = 2
+            dfs(root.right)#right, left, root
+            dfs(root.left) 
+            root.right = prev#set right
+            root.left = None #set left
+            prev = root  #set previous
 
         dfs(root)
         
