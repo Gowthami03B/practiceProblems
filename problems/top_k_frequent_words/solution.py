@@ -2,6 +2,18 @@ import heapq
 from heapq import heappop, heappush
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        wordMap = collections.defaultdict(int)
+        for word in words:
+            wordMap[word] += 1
+        maxheap = []
+        #heap takes care of sorting
+        for word, freq in wordMap.items():
+            heappush(maxheap, (-freq, word))
+        #list comprehensions
+        return [heappop(maxheap)[1] for _ in range(k)]
+        
+        
+    def topKFrequentMethod2(self, words: List[str], k: int) -> List[str]:
         wordMap = Counter(words)
         output = [x[0] for x in sorted(wordMap.items(), key=lambda kv:(-kv[1],kv[0]))[:k]]#gives a list sorted by words in frequency first and lexicographical next, selecting first k words
         print(output)
@@ -14,5 +26,4 @@ class Solution:
             res.append(word)
             
         return res
-        
         
