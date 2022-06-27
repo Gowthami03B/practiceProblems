@@ -19,8 +19,7 @@ class Solution:
         m = len(s) - 1
         sum = 0
         sum += romanEnum[s[m]]
-        m-=1
-        for i in range(m,-1,-1):
+        for i in range(m-1,-1,-1):
             if romanEnum[s[i]] < romanEnum[s[i+1]]:
                 sum -= romanEnum[s[i]]
             else:
