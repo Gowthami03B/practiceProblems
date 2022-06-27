@@ -1,5 +1,5 @@
 class Solution:
-    def romanToInt1(self, s: str) -> int:
+    def romanToIntNonPythonic(self, s: str) -> int:
         mapping = {'I':1,'V' :5, 'X' :10,'L' :50, 'C':100,'D':500,'M':1000}
         i = 0
         sum = 0
@@ -20,6 +20,7 @@ class Solution:
         sum = 0
         sum += romanEnum[s[m]]
         for i in range(m-1,-1,-1):
+            #if curr char is < next, then subtract else add
             if romanEnum[s[i]] < romanEnum[s[i+1]]:
                 sum -= romanEnum[s[i]]
             else:
