@@ -39,3 +39,35 @@ class Solution:
             if pcount == scount: #when both arrays are equal, return i-m+1(plus 1 bcs i is not incremented)
                 res.append(i-m+1)
         return res
+    
+    def findAnagramsBruteForce(self, s: str, p: str) -> List[int]:
+        def check_anagram(s:str, i:int, j:int ,map_p:dict) -> bool : 
+            start, end = i,j
+            map_s = collections.defaultdict(int)
+            for i in range(start, end + 1):
+                if s[i] not in map_p:
+                    return False
+                map_s[s[i]] += 1
+            for i in range(start, end + 1):
+                if map_p[s[i]] != map_s[s[i]]:
+                    return False
+            return True
+        
+        if not s or not p:
+            return []
+        if s == p:
+            return [0]
+        map_p = collections.defaultdict(int)
+        for c in  p:
+            map_p[c] += 1
+
+        i , j =0, len(p) - 1
+        res = []
+        while (i <= j and i in range(len(s)) and j in range(len(s))) :
+            if check_anagram(s, i, j,map_p):
+                res.append(i)
+            i += 1
+            j += 1
+        return res
+
+        
