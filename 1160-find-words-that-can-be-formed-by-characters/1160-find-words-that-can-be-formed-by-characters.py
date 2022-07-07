@@ -16,3 +16,12 @@ class Solution:
             if isValid:
                 sum_len += len(word)
         return sum_len
+    
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        return sum(len(word) if collections.Counter(word) <= collections.Counter(chars) else 0 for word in words)
+        # sum_len = 0
+        # for word in words:
+        #     if collections.Counter(word) <= collections.Counter(chars):
+        #         sum_len += len(word)
+        # return sum_len
+        
