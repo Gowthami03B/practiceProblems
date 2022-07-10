@@ -4,7 +4,7 @@ class Solution:
         if x == 0:
             return 0
         elif x > 0:
-            reversed_int = int(str(x)[::-1])
+            reversed_int = int(str(x)[::-1])#reverse the number check the limits
             if -2**31 <= reversed_int <= 2**31 - 1:
                 return reversed_int
             else:
@@ -27,10 +27,10 @@ class Solution:
         while x > 0:
             reminder = x % 10
             x = x//10
-            reversed_int = reversed_int * 10 + reminder
+            reversed_int = reversed_int * 10 + reminder #construct the reverse number
         if neg:
             reversed_int = -reversed_int
-        if -2**31 <= reversed_int <= 2**31 - 1:
+        if -2**31 <= reversed_int <= 2**31 - 1:#check the boundaries
             return reversed_int
         else:
             return 0
