@@ -29,15 +29,11 @@ class Solution:
             x = x//10
             reversed_int = reversed_int * 10 + reminder
         if neg:
-            if -2**31 <= -reversed_int <= 2**31 - 1:
-                return -reversed_int
-            else:
-                return 0
+            reversed_int = -reversed_int
+        if -2**31 <= reversed_int <= 2**31 - 1:
+            return reversed_int
         else:
-            if -2**31 <= reversed_int <= 2**31 - 1:
-                return reversed_int
-            else:
-                return 0
+            return 0
             
             
             
