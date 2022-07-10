@@ -1,11 +1,23 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        res = [0] * 26
+        # #2 constant arrays
+        # s_arr = [0] * 26
+        # t_arr = [0] * 26
+        # for c in s:
+        #     s_arr[ord('a')-ord(c)] += 1
+        # for c in t:
+        #     t_arr[ord('a')-ord(c)] += 1
+        # if s_arr != t_arr:
+        #     return False
+        # return True
+    
+        #1 constant arrays
+        s_arr = [0] * 26
         for c in s:
-            res[ord(c) - ord('a')] += 1
+            s_arr[ord('a')-ord(c)] += 1
         for c in t:
-            res[ord(c) - ord('a')] -= 1
-        for v in res:
-            if v >0 or v < 0:
+            s_arr[ord('a')-ord(c)] -= 1
+        for count in s_arr:
+            if count >0 or count < 0:
                 return False
         return True
