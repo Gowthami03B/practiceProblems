@@ -39,12 +39,8 @@ class HitCounter:
         self.hit_queue.append(timestamp)
 
     def getHits(self, timestamp: int) -> int:
-        while(self.hit_queue):
-            diff = timestamp - self.hit_queue[0]
-            if diff >= 300:
-                self.hit_queue.popleft()
-            else:
-                break
+        while self.hit_queue and timestamp - self.hit_queue[0] >= 300:
+            self.hit_queue.popleft()
         return len(self.hit_queue)
     
 
