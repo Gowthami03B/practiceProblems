@@ -13,9 +13,9 @@ class Solution:
     #Build from right
     def getSmallestString(self, n: int, k: int) -> str:
         res = [""]* n
-        for i in range(n, 0, -1):
-            add = min(k-i+1,26)#min of k-i+1, we need to allocate atleast 1 for remaining positions, hence k-i+1, 26
-            res[i-1] = chr(add + ord('a') - 1)#add + ord('a') - 1,ord(a)=97 and z is 122, diff is 25 
+        for i in range(n-1, -1, -1):
+            add = min(k-i,26)#min of k-i+1, we need to allocate atleast 1 for remaining positions, hence k-i+1, 26
+            res[i] = chr(add + ord('a') - 1)#add + ord('a') - 1,ord(a)=97 and z is 122, diff is 25 
             k -= add
         print(ord('a')-ord('z'))
         return "".join(res)
