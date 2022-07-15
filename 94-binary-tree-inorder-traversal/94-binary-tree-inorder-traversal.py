@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def inorderTraversalRecursive(self, root: Optional[TreeNode]) -> List[int]:
         res = []
         def dfs(root):
             nonlocal res
@@ -16,4 +16,16 @@ class Solution:
             dfs(root.right)
         dfs(root)
         return res
-            
+    
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        stack = []
+        res = []
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                node = stack.pop()
+                res.append(node.val)
+                root = node.right
+        return res
