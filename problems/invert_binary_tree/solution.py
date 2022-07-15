@@ -6,38 +6,28 @@
 #         self.right = right
 from collections import deque
 class Solution:
-    #recursion
-    def invertTree1(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root is None:
-            return None
-        else:
-            invertleft = self.invertTree(root.left)
-            invertright = self.invertTree(root.right)
-            root.left = invertright
-            root.right = invertleft
-            return root
+    def invertTreeRecursive(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        def dfs(root):
+            if not root:
+                return
+            left = dfs(root.left)
+            right = dfs(root.right)
+            root.left, root.right = right, left#append left to right, right to left
+            return root#return root
+            
+        dfs(root)
+        return root
     
-    #iterative - add to queue, pop, invert, add subtrees and loop while queue
-    def invertTree1(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    #at each level we invert the right and left subtrees, so go level wise and invert
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if root is None:
             return None
         queue = deque([root])
-        while(queue):
-            current = queue.popleft()
-            current.left,current.right = current.right,current.left
-            if current.left:
-                queue.append(current.left)
-            if current.right:
-                queue.append(current.right)
-        return root
-    
-    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if not root:
-            return
-
-        left = self.invertTree(root.left)
-        right = self.invertTree(root.right)
-
-        root.left = right
-        root.right = left
+        while queue:
+            curr = queue.popleft()
+            curr.left, curr.right = curr.right, curr.left
+            if curr.left:
+                queue.append(curr.left)
+            if curr.right:
+                queue.append(curr.right)
         return root
