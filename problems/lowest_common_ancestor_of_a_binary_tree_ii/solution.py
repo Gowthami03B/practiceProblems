@@ -9,7 +9,7 @@ class Solution:
     def __init__(self):
         self.ancestor = None
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        self.targets = [p.val, q.val]
+        self.targets = [p.val, q.val]#this works when p and q are just values
         self.dfs(root,p,q)
         return self.ancestor if self.ancestor else None
     
