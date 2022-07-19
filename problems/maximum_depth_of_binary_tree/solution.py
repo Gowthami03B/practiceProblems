@@ -41,6 +41,7 @@ class Solution:
 #                 stack.append([node.left,depth+1])
 #         return res
     
+    #Level order traversal
         if root is None:
             return 0
         queue = deque([root])
