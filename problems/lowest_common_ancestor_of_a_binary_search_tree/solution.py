@@ -11,13 +11,9 @@ class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         if root is None:
             return
-        # if p.val == root.val or q.val == root.val and not self.ancestor:
-        #      self.ancestor = root
-        # if (p.val <= root.val <= q.val or q.val <= root.val <= p.val) and not self.ancestor:
-        #     self.ancestor = root
-        if (p.val < root.val and q.val < root.val):
+        if (p.val < root.val and q.val < root.val):#if both less than root, then continue on left side
             return self.lowestCommonAncestor(root.left,p,q)
-        elif (p.val > root.val and q.val > root.val):
-            return self.lowestCommonAncestor(root.right,p,q)
+        elif (p.val > root.val and q.val > root.val):#else right side
+            return self.lowestCommonAncestor(root.right,p,q)#else root is the commo
         else:
             return root
