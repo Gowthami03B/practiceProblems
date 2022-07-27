@@ -5,6 +5,14 @@ class SparseVector:
         for i, n in enumerate(nums):
             if n != 0:
                 self.nonzeros[i] = n
+                
+        """
+        approach 3 - using list of (index,val pairs)
+        self.pairs = []
+        for i, n in enumerate(nums):
+            if n != 0:
+                self.pairs.append([i,n])
+        """
 
     # Return the dotProduct of two sparse vectors
     def dotProduct(self, vec: 'SparseVector') -> int:
@@ -20,6 +28,22 @@ class SparseVector:
             if idx in vec.nonzeros:
                 totsum += val * vec.nonzeros[idx]
         return totsum
+    
+        """
+        approach 3 - using list of (index,val pairs)
+        v1 ,v2 =0,0
+        totsum = 0
+        while v1 < len(self.pairs) and v2 < len(vec.pairs):
+            if self.pairs[v1][0] == vec.pairs[v2][0]:
+                totsum += self.pairs[v1][1] * vec.pairs[v2][1]
+                v1 += 1
+                v2 += 1
+            elif self.pairs[v1][0] < vec.pairs[v2][0]:
+                v1 += 1
+            else:
+                v2 += 1
+        return totsum
+        """
 
 # Your SparseVector object will be instantiated and called as such:
 # v1 = SparseVector(nums1)
