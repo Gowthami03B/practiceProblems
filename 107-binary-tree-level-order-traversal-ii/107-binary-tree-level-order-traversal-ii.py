@@ -5,11 +5,14 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def levelOrderBottom1(self, root: Optional[TreeNode]) -> List[List[int]]:
+    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+        #intuition - travel level by level and add elements to lists and reverse
         levels = []
+        if not root:
+            return levels
         def helper(node, level):
             if len(levels) == level:
-                levels.append([])
+                levels.append([])#create new sublist as you need to capture elements per level
             levels[level].append(node.val)
             if node.left:
                 helper(node.left, level+1)
@@ -19,9 +22,9 @@ class Solution:
         helper(root,0)
         return levels[::-1]
     
-    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
-            queue=collections.deque([(root,1)])
-            dic=collections.defaultdict(list)
+    def levelOrderBottomBFS(self, root: Optional[TreeNode]) -> List[List[int]]:
+            queue=collections.deque([(root,1)])#root, level as list of tuples
+            dic=collections.defaultdict(list)#dict to store levels
             res=[]
             while queue:
                 root,level=queue.popleft()
@@ -32,7 +35,7 @@ class Solution:
                     queue.append((root.left,level+1))
                 if root.right:
                     queue.append((root.right,level+1))
-            for key in sorted(dic,reverse=True):
+            for key in sorted(dic,reverse=True):#reverse sorted order of keys
                 res.append(dic[key])
             return res
 
