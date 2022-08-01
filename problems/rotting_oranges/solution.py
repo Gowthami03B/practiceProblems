@@ -1,40 +1,30 @@
-import collections
-from collections import deque
 class Solution:
-    def orangesRotting(self, grid: list[list[int]]) -> int:
-        rows , cols = len(grid), len(grid[0])
-        q = deque()
-        visit = set()
-        print(grid)
-        def access(r,c):
-            if(r < 0 or r ==rows or c < 0 or c == cols or (r,c) in visit or grid[r][c] == 0):
-                return
-            q.append([r,c])
-            visit.add((r,c))
-            
-        freshoranges = 0
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        rows = len(grid)
+        cols = len(grid[0])
+        queue = deque()
+        visited = set()
+        freshOranges = 0
+        dir = [[0,1],[1,0],[0,-1],[-1,0]]
         for i in range(rows):
             for j in range(cols):
                 if grid[i][j] == 2:
-                    q.append([i,j])
-                    visit.add((i,j))
+                    queue.append((i,j,0))
+                    visited.add((i,j))
                 elif grid[i][j] == 1:
-                    freshoranges+= 1
-        
-        if freshoranges == 0:
-            return 0
-        countMin = -1
-        
-        while q:
-            for i in range(len(q)):
-                r,c = q.popleft()
-                access(r+1,c)
-                access(r,c + 1)
-                access(r-1,c)
-                access(r,c - 1)
-                if grid[r][c] == 1:
-                    freshoranges-= 1
-                grid[r][c] = 2
-            countMin+=1
-        print(grid)
-        return countMin if freshoranges == 0 else -1
+                    freshOranges += 1#keep track of fresh oranges
+                    
+        while(queue):
+                        r,c,minElapsed = queue.popleft()
+                        for dr,dc in dir:
+                            nr = r + dr
+                            nc = c + dc
+                            if 0<= nr < rows and 0<= nc < cols and (nr,nc) not in visited and grid[nr][nc] == 1:
+                                grid[nr][nc] = 2
+                                freshOranges -= 1#deduct freshOranges
+                                if freshOranges == 0:
+                                    return minElapsed + 1
+                                queue.append((nr,nc,minElapsed+1))#minElapsed + 1 for next iteration
+                                visited.add((nr,nc))
+        return 0 if freshOranges == 0 else -1#if there are no fresh oranges to be rotten, then 0 else -1
+            
