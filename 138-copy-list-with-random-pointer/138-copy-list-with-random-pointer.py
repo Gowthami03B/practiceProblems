@@ -8,7 +8,7 @@ class Node:
 """
 
 class Solution:
-    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+    def copyRandomList1(self, head: 'Optional[Node]') -> 'Optional[Node]':
         visited = {}#has clones copies of nodes
         #head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
         #7's next is 13 and random is null, 13's random is 0th node i.e 7
@@ -28,7 +28,7 @@ class Solution:
         return deepCopy(head)
     
     
-    def copyRandomList1(self, head: 'Optional[Node]') -> 'Optional[Node]':
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         visited = {}
         def getClonedNode(node):
             if node:
