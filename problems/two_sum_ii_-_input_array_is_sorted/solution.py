@@ -1,5 +1,5 @@
 class Solution:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+    def twoSum2(self, numbers: List[int], target: int) -> List[int]:
         n = len(numbers)
         if  n < 2:
             return []
@@ -14,3 +14,15 @@ class Solution:
                     h = mid - 1
                 else:
                     s = mid + 1
+
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        low,high = 0, len(numbers)-1
+        while low < high:
+            tot = numbers[low] + numbers[high]
+            if tot == target:
+                return [low + 1, high+1]
+            elif tot > target:
+                high -= 1
+            else:
+                low +=1
+        return []
