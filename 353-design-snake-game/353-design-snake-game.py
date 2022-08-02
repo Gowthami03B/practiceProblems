@@ -3,7 +3,7 @@ class SnakeGame:
     def __init__(self, width: int, height: int, food: List[List[int]]):
         self.height = height
         self.width = width
-        self.queue = deque([(0,0)])
+        self.queue = deque([(0,0)])#has the whole body, starting from head to tail
         self.food = food
         self.snake_set = set([(0,0)])#Maintain a hashset which models the unique co-ordinates which define the snake's body.
         self.dir = {"R" : (0,1),"L": (0,-1),"U":(-1,0),"D":(1,0)}
@@ -16,6 +16,8 @@ class SnakeGame:
         if not (0<=nr<self.height and 0<=nc<self.width):
             return -1
         #If the new co-ordinates collide with the snake body (except the tail which would be eventually shifted), we return -1.hence if nr,nc in snakeset and not same as old tails position
+        #example say 3x3, snake coords - [0,1] [0,] [1,2] [1,1] [1,0] next pos is 1,1
+        #we need to check if next pos is part of body and not same as tail, if it's same as tail, tail shifts and no collision, only if it's part of body then collision happens
         if (nr,nc) in self.snake_set and (nr,nc) != (self.queue[-1][0],self.queue[-1][1]):
             return -1
         #that means food is available to eat
@@ -27,7 +29,7 @@ class SnakeGame:
         #If food is available at the head location, we add the food location as the new head. This increases the length of the snake.
         self.queue.appendleft((nr, nc))
         self.snake_set.add((nr, nc))  
-        print((nr,nc), self.queue, self.snake_set)
+        # print((nr,nc), self.queue, self.snake_set)
         return self.gamescore
             
 
