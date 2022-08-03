@@ -7,6 +7,7 @@ class Solution:
         for i in range(rows):
             for j in range(cols):
                 #for every island or 1 found, do a BFS in all directions
+                #but you are gonna visit all islands only once since you check visited hence O(M*N) for time and space
                 if grid[i][j] == 1 and (i,j) not in visited:
                     islands = 1
                     queue.append([i,j])
