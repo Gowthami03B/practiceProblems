@@ -38,7 +38,7 @@ class Solution:
                         dir = [[1,0],[0,1],[-1,0],[0,-1]]
                         for dr, dc in dir:
                             nr, nc = r+dr, c+dc
-                            if nr in range(rows) and nc in range(cols) and grid[nr][nc] == "1" and (nr,nc) not in visited:
+                            if 0<= nr < rows and 0<= nc < cols and grid[nr][nc] == "1" and (nr,nc) not in visited:
                                 visited.add((nr,nc))
                                 queue.append([nr,nc])
                     countIslands += 1
