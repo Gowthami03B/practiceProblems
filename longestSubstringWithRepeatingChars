@@ -1,0 +1,34 @@
+"""
+Given a string s of size N. The task is to find the largest substring which consists of the same characters
+Examples: 
+ 
+
+Input : s = “abcdddddeff” 
+Output : 5 
+Substring is “ddddd”
+Input : s = aabceebeee 
+Output : 3 
+ """
+def substringWithRepeatingChars(s):
+    n = len(s)
+    # start,end = 0, 1
+    longest = 0
+    # while(start < end and end < n-1):
+    #     if s[end] == s[start]:
+    #         end += 1
+    #     else:
+    #         longest = max(longest, end-start)
+    #         start = end
+    #         end += 1
+    # longest = max(longest, end-start + 1)
+    # return longest
+    count = 1
+    for i in range(1,len(s)):
+        if s[i] == s[i-1]:
+            count += 1
+        else:
+            longest = max(longest, count)
+            count = 1
+    longest = max(longest, count)
+    return longest
+print(substringWithRepeatingChars("aabceebeee"))
