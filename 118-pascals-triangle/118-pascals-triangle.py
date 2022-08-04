@@ -4,9 +4,9 @@ class Solution:
         res.append([1])
         if numRows == 1:
             return res
-        res.append([1,1])
-        if numRows == 2:
-            return res
+        # res.append([1,1])
+        # if numRows == 2:
+        #     return res
         while(len(res) < numRows):
             curr = res[-1]
             temp = []
