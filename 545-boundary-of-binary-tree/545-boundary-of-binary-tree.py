@@ -10,8 +10,11 @@ class Solution:
         if not root:
             return res
         res = [root.val]
-        left_boundary = self.findleft(root.left)
-        right_boundary = self.findright(root.right)
+        #One simple approach is to divide this problem into three subproblems- left boundary, leaves and right boundary.
+        #Another approach we can observe that our problem statement is very similar to the Preorder traversal using some flags to keep track of left,right boundaries or leaves
+
+        left_boundary = self.findleft(root.left)#leftside
+        right_boundary = self.findright(root.right)#rightside
         leaves=[]
         if root.left or root.right:
             self.findLeaves(root,leaves)
@@ -21,6 +24,7 @@ class Solution:
     def isleaf(self,root):
         return not root.left and not root.right
     
+    #We keep on traversing the tree towards the left and keep on adding the nodes in the res array, provided the current node isn't a leaf node, else stop we found left boundary
     def findleft(self,root):
         node,parent = root,root
         res = []
@@ -33,6 +37,7 @@ class Solution:
         # print(res)
         return res
     
+    #same for right
     def findright(self,root):
         node,parent = root,root
         res = []
@@ -43,10 +48,10 @@ class Solution:
             else:
                 node = node.left
         # print(res)
-        return res[::-1]
+        return res[::-1]#need right boundary in reverse order
     
     def findLeaves(self,root,res):
-        if root and self.isleaf(root):
+        if root and self.isleaf(root):#if leaf
             res.append(root.val)
         if root.left:
                 self.findLeaves(root.left,res)
