@@ -36,11 +36,14 @@ Recursively call store(nums, 3), next step would be store(nums,4), store(nums,1)
         return nums[0]
     
     def findDuplicate(self, nums: List[int]) -> int:
+        #Consider an array that has n distinct numbers in the range [1,n]. For example: [1,2,3,4,5]. If we pick any one of these 5 numbers and count how many numbers are less than or equal to it, the answer will be equal to that number. So in [1,2,3,4,5], if you pick the number 4, there's exactly 4 numbers that are less than or equal to 4.
         #[3,3,5,4,1,3], counts =[1,1,4,5,6]
+        #Binary search is log n but for each search, we need to count utmost n values hence O(n log n)
         low,high = 0,len(nums) - 1
         while(low <= high):
             mid = low + (high-low)//2 #here 4 becomes mid first
             count = 0
+            # Count how many numbers are less than or equal to 'mid'
             count = sum(num <= mid for num in nums)
             if count >mid:
                 duplicate= mid#duplicate would be 4 as count > mid, but is not the duplicate, we need to lessen the search space
