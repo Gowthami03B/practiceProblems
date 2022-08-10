@@ -1,20 +1,25 @@
+from threading import Lock
 class MyCircularQueue:
 
     def __init__(self, k: int):
     #we store head of the queue at the front and tail at the end
     #we need to update our head index to shift our head whenever queue is dequeued, similarly we need the modulo operation to fill the front of our queue if there's space
+    #formulas are normal formulas say next headval is head+1, we just add mod to it
         self.capacity = k
         self.arr =[0] * k
         self.head=0
         self.count=0 #current no of elements in queue
+        self.queueLock = Lock()
 
     def enQueue(self, value: int) -> bool:
-        if self.isFull():
-            return False
-        #since it's a circular queue, we keep going to end of queue and then coming to 0th position after it exceeds capacity, hence the mod operation
-        newPos= (self.head + self.count)%self.capacity
-        self.arr[newPos] = value
-        self.count += 1
+        with self.queueLock:# automatically acquire the lock when entering the block
+            if self.isFull():
+                return False
+            #since it's a circular queue, we keep going to end of queue and then coming to 0th position after it exceeds capacity, hence the mod operation
+            newPos= (self.head + self.count)%self.capacity
+            self.arr[newPos] = value
+            self.count += 1
+        # automatically release the lock when leaving the block
         return True
 
     def deQueue(self) -> bool:
@@ -46,7 +51,6 @@ class MyCircularQueue:
 
     def isFull(self) -> bool:
         return self.count == self.capacity
-
 
 # Your MyCircularQueue object will be instantiated and called as such:
 # obj = MyCircularQueue(k)
