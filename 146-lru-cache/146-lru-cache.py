@@ -31,23 +31,24 @@ class LinkedNode():
         self.next=None
     
 class LRUCache():
+    #we need O(1) hence hashmap,but we can't track least recently used, hence doubly linked list as add/remove from the head and tail is O(1); we add the most recently accessed node after head and remove the least recently used ones before tail
     def __init__(self, capacity: int):
         self.capacity = capacity
         self.ordered_map = {}
         self.list_size = 0
         #create a linked list to store values and maintain the least used values at tail and highly used ones near head
-        self.head,self.tail = LinkedNode(),LinkedNode()
+        self.head,self.tail = LinkedNode(),LinkedNode()#pseudo head and tail to mark boundary
         self.head.next = self.tail
         self.tail.prev=self.head
         
-    def add_node(self,node):
+    def add_node(self,node):#O(1)
         next_node = self.head.next
         next_node.prev = node
         self.head.next = node
         node.next = next_node
         node.prev = self.head
         
-    def remove(self,node):
+    def remove(self,node):#O(1)
         prev= node.prev #get prev
         next_node = node.next#get next
         prev.next = next_node #prev.next would be next_node
