@@ -4,27 +4,24 @@ class ParkingSystem:
         self.big =big
         self.small=small
         self.medium=medium
-        self.occupied_big=0
-        self.occupied_small=0
-        self.occupied_medium=0
 
     def addCar(self, carType: int) -> bool:
         match carType:
             case 1:
-                if self.occupied_big == self.big:
-                    return False
-                self.occupied_big +=1
-                return True
+                if self.big > 0:
+                    self.big -=1
+                    return True
+                return False
             case 2:
-                if self.occupied_medium == self.medium:
-                    return False
-                self.occupied_medium +=1
-                return True
+                if self.medium > 0:
+                    self.medium -=1
+                    return True
+                return False
             case 3:
-                if self.occupied_small == self.small:
-                    return False
-                self.occupied_small +=1
-                return True
+                if self.small > 0:
+                    self.small -=1
+                    return True
+                return False
         
 
 
