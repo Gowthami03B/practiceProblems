@@ -34,7 +34,7 @@ class Solution:
 
         results = []
         def dfs(node, level):
-            if level >= len(results):#normal condition if level >=len(results); we can append the initial nodes as queue and create a new level
+            if level == len(results):#normal condition if level >=len(results); we can append the initial nodes as queue and create a new level
                 results.append(deque([node.val]))#deque so we can append on both sides
             else:#else say [3,9,20,null,null,15,7], when 20 is there,level = 1, res has len 2, and for all level 1, order is right to left
                 if level % 2 == 0:
@@ -46,8 +46,6 @@ class Solution:
                 dfs(node.left, level+1)
             if node.right:
                 dfs(node.right, level+1)
-            # for next_node in [node.left, node.right]:
-            #     if next_node is not None:
                 
         # normal level order traversal with DFS
         dfs(root, 0)
