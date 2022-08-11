@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+    def zigzagLevelOrder1(self, root: Optional[TreeNode]) -> List[List[int]]:
         
         res = []
         if not root:
@@ -27,4 +27,30 @@ class Solution:
             else:
                 res.append(levels)
         return res
+        
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root is None:
+            return []
+
+        results = []
+        def dfs(node, level):
+            if level >= len(results):#normal condition if level >=len(results); we can append the initial nodes as queue and create a new level
+                results.append(deque([node.val]))#deque so we can append on both sides
+            else:#else say [3,9,20,null,null,15,7], when 20 is there,level = 1, res has len 2, and for all level 1, order is right to left
+                if level % 2 == 0:
+                    results[level].append(node.val)
+                else:
+                    results[level].appendleft(node.val)
+                    
+            if node.left:
+                dfs(node.left, level+1)
+            if node.right:
+                dfs(node.right, level+1)
+            # for next_node in [node.left, node.right]:
+            #     if next_node is not None:
+                
+        # normal level order traversal with DFS
+        dfs(root, 0)
+
+        return results
         
