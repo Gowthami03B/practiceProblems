@@ -9,6 +9,7 @@ class Solution:
         try dividing the list in half and reverse the second half
         Use two different pointers pointing to the first nodes of the two halves of the linked list. The second pointer will point to the first node of the reversed half, which is the (n-1-i)th node in the original linked list. By moving both pointers forward at the same time, we find all twin sums.
         """
+        #The thing is that curr is not a copy of the original (node or list). It is a name you give for a given node that is in the original list, if you change curr.next or curr.val, values change in the head as well.
         curr = head
         count_nodes = 0
         while(curr):
@@ -27,6 +28,7 @@ class Solution:
         #[6,3,4], we do 6->None first, then 3->6->None and 4->3>6>None
         while(secondhalf):
             nextnode = secondhalf.next #copying next into temporary
+            #below code changes the head node as well as secondhalf is a pointer to the head node and a linked list node can change in two ways - by changing val/next
             secondhalf.next = reversehalf #initially reversehalf is none, assign it to second.next 
             reversehalf = secondhalf#assign secondhalf to reverse
             secondhalf = nextnode#continue iteration on second's next stored in temporary
