@@ -15,17 +15,17 @@ class Solution:
             if indegree[i] == 0 and i not in visited: #if indegree is 0 and not visited
                 queue.append(i)
             
-            while(queue):
-                course = queue.popleft()
-                if course in visited:
-                    return
-                if indegree[course] == 0:#if indegree is 0, we can complete the course, hence inc count and add to visited
-                    count += 1
-                    visited.add(course)
-                    for course in graph[course]: #for each dependent course 
-                            indegree[course] -= 1 #decrement indegree of dependent courses as we completed their prerequiste course
-                            if indegree[course] == 0:#if indegree is 0, we need to complete the course, hence add to queue
-                                queue.append(course)
+        while(queue):
+            course = queue.popleft()
+            if course in visited:
+                return
+            if indegree[course] == 0:#if indegree is 0, we can complete the course, hence inc count and add to visited
+                count += 1
+                visited.add(course)
+                for course in graph[course]: #for each dependent course 
+                        indegree[course] -= 1 #decrement indegree of dependent courses as we completed their prerequiste course
+                        if indegree[course] == 0:#if indegree is 0, we need to complete the course, hence add to queue
+                            queue.append(course)
                     
         return numCourses == count
         
