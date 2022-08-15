@@ -19,12 +19,14 @@ class WordDictionary:
         # curr.word = True
         curr = self.wordmap
         for ch in word:
-            if ch not in curr:#if ch is not in map
-                curr[ch] = {}#create new
-            curr = curr[ch]#else get the map and assign to curr
+            curr = curr.setdefault(ch,{})
+            # if ch not in curr:#if ch is not in map
+            #     curr[ch] = {}#create new
+            # curr = curr[ch]#else get the map and assign to curr
         curr['$'] = True#marks end of word
         # print(self.wordmap)
         """
+        'd': {'a': {'d': {'$': True} : {'d' : {'y' : {'$' : True}}}
         {'b': {'a': {'d': {'$': True}}}}
 {'b': {'a': {'d': {'$': True}}}, 'd': {'a': {'d': {'$': True}}}}
 {'b': {'a': {'d': {'$': True}}}, 'd': {'a': {'d': {'$': True}}}, 'm': {'a': {'d': {'$': True}}}}
