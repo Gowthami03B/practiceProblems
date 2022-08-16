@@ -19,14 +19,14 @@ class Solution:
         for key,val in indegree.items():
             if val == 0 and key not in visited and key in supplies: #start with indegree 0 and not in visited and make sure that item is in supplies
                 queue.append(key)
-            while(queue):
-                ele = queue.popleft()
-                if indegree[ele] == 0:
-                    visited.add(ele)#add to visited
-                for child in recipe_ingredients[ele]:#for each recipe that's dependent on a ingredient
-                    indegree[child] -= 1#reduce indgeree of recipe dependent on that ingredient
-                    if indegree[child] == 0:
-                        queue.append(child)
+        while(queue):
+            ele = queue.popleft()
+            if indegree[ele] == 0:
+                visited.add(ele)#add to visited
+            for child in recipe_ingredients[ele]:#for each recipe that's dependent on a ingredient
+                indegree[child] -= 1#reduce indgeree of recipe dependent on that ingredient
+                if indegree[child] == 0:
+                    queue.append(child)
                         
         for recipe in recipes:
             if recipe in visited:#if recipe in visited, it can be prepared
