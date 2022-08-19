@@ -1,5 +1,10 @@
 class Solution:
     def numberOfWays(self, s: str) -> int:
+        """
+        For "1", we want "010"
+For "0", we want "101"
+Thus, all we need to do is to count how many 0s and 1s are before/after 1 and 0
+        """
         ans=0
         n=len(s)
         left=[0]*n
