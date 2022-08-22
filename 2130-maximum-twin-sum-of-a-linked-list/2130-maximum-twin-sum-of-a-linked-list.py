@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def pairSum(self, head: Optional[ListNode]) -> int:
+    def pairSum1(self, head: Optional[ListNode]) -> int:
         """
         try dividing the list in half and reverse the second half
         Use two different pointers pointing to the first nodes of the two halves of the linked list. The second pointer will point to the first node of the reversed half, which is the (n-1-i)th node in the original linked list. By moving both pointers forward at the same time, we find all twin sums.
@@ -41,5 +41,39 @@ class Solution:
             reversehalf = reversehalf.next
         return maxValue
         
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        if not head:
+            return -1
         
+        max_sum = 0
+        def find_second_half(head):
+            slow_ptr, fast_ptr=head,head
+            prev_ptr=None
+            while fast_ptr and fast_ptr.next:
+                prev_ptr=slow_ptr
+                slow_ptr=slow_ptr.next
+                fast_ptr=fast_ptr.next.next
+            
+            prev_ptr.next=None
+            return slow_ptr
+        
+        def reverse(node):
+            prev=None
+            while node:
+                temp_next = node.next
+                node.next=prev
+                prev=node
+                node =temp_next
+            return prev
+    
+        second_half = find_second_half(head)
+        # print(second_half)
+        reversed_second_half=reverse(second_half)
+        # print(reversed_second_half,head)
+        
+        while head and reversed_second_half:
+            max_sum = max(max_sum,head.val+reversed_second_half.val)
+            head = head.next
+            reversed_second_half = reversed_second_half.next
+        return max_sum
             
