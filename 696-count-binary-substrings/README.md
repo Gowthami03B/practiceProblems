@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/count-binary-substrings/">696. Count Binary Substrings</a></h2><h3>Easy</h3><hr><div><p>Give a binary string <code>s</code>, return the number of non-empty substrings that have the same number of <code>0</code>'s and <code>1</code>'s, and all the <code>0</code>'s and all the <code>1</code>'s in these substrings are grouped consecutively.</p>
+<h2><a href="https://leetcode.com/problems/count-binary-substrings/">696. Count Binary Substrings</a></h2><h3>Easy</h3><hr><div><p>Given a binary string <code>s</code>, return the number of non-empty substrings that have the same number of <code>0</code>'s and <code>1</code>'s, and all the <code>0</code>'s and all the <code>1</code>'s in these substrings are grouped consecutively.</p>
 
 <p>Substrings that occur multiple times are counted the number of times they occur.</p>
 
