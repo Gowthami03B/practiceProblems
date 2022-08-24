@@ -2,6 +2,7 @@ class Trie:
     def __init__(self):
         self.root = {}
         
+    #worst case, if the words has no concatenated words, then O(S) - trie with all chars in all words, O(N.M) -N no of words, M length of longest string
     def insert(self, word):
         node = self.root
         for i, c in enumerate(word):
@@ -33,8 +34,9 @@ class Solution:
     def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
         trie = Trie()
         res = []
-        words.sort(key=len)
+        words.sort(key=len)#from small words, we make big words, hence sort by len
         for word in words:
             if not trie.insert(word):#if the word cannot be inserted into the trie, that word is the concatenated word
                 res.append(word)
+        print(trie.root)
         return res
