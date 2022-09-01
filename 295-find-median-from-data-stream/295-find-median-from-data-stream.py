@@ -3,16 +3,19 @@ class MedianFinder:
 
     def __init__(self):
         self.nums = []
-        self.minHeap = [] #min heap to store large elements
-        self.maxHeap = [] #max heap to store small elements
+        self.minHeap = [] #min heap to store large elements(second half)
+        self.maxHeap = [] #max heap to store small elements(first half)
+        #basically if we can divide the array into 2 halves, for the median we need the top of both the heaps if len is even
 
         #cannot take abs as there will be negative numbers also
     def addNum(self, num: int) -> None:
-        heappush(self.maxHeap, -1 * num)
-        #check if elements in maxHeap > minHeap, then take max ele from maxheap and move to minheap
+        # print(self.minHeap,self.maxHeap)
+        heappush(self.maxHeap, -1 * num)#add to maxheap first
+        #check if elements in maxHeap > minHeap, then take max ele from maxheap and move to minheap; bcs we need the second half of stream to be in minheap
         if self.maxHeap and self.minHeap and abs(self.maxHeap[0]) > self.minHeap[0]:
             heappush(self.minHeap, -1 * heappop(self.maxHeap))
             
+        #we also rearrange heaps when their size differs by more than 1
         if len(self.maxHeap) > (len(self.minHeap) + 1):
             #take max ele from maxheap and move to minheap
             heappush(self.minHeap, -1 * heappop(self.maxHeap))
@@ -22,6 +25,7 @@ class MedianFinder:
             heappush(self.maxHeap, -1 * heappop(self.minHeap))
 
     def findMedian(self) -> float:
+        # print(self.minHeap,self.maxHeap)
         if len(self.minHeap) > len(self.maxHeap):
             return self.minHeap[0]
         elif len(self.maxHeap) > len(self.minHeap):
