@@ -33,8 +33,8 @@ class Solution:
 #             else:
 #                 dp[i][i+1] = False
 #         # print(count, dp)    
-#         for i in range(n-1):
-#             for j in range(2,n):
+#         for i in reversed(range(n-1)):
+#             for j in range(i+1,n):
 #                 if s[i] == s[j]:
 #                     dp[i][j] = dp[i+1][j-1] and (s[i] == s[j])
 #                     if dp[i][j]:
@@ -44,9 +44,11 @@ class Solution:
 #                     dp[i][j] = False
 #         print(dp)
 #         return count
-
+        #we consider that every character is the center of a palindrome
         for i in range(n):
+            #odd-length palindromes, single character center
             count += self.expandCenter(s,i,i)
+            #even-length palindromes, consecutive characters center
             count += self.expandCenter(s,i,i+1)
             
         return count
@@ -55,10 +57,10 @@ class Solution:
             print(start,end)
             count = 0
             while(start >= 0 and end < len(s)):
-                if s[start] != s[end]:
+                if s[start] != s[end]:#the first and last characters don't match!
                     break
-                start -= 1
-                end += 1
-                count += 1
+                start -= 1#go left
+                end += 1#expand right
+                count += 1#increment count
             return count
                 
