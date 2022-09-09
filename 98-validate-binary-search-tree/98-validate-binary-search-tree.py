@@ -47,7 +47,7 @@ class Solution:
         self.prev = -math.inf
         return inorder(root)
     
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    def isValidBST1(self, root: Optional[TreeNode]) -> bool:
         if not root:
             return True
         stack , prev = [], -math.inf
@@ -63,4 +63,20 @@ class Solution:
                 root = node.right
         return True
             
-            
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        res = []
+        def check(root):
+            if not root:
+                return None
+
+            check(root.left)
+            res.append(root.val)
+            check(root.right)
+
+        check(root)
+
+        for i in range(1,len(res)):
+            if res[i] <= res[i-1]:
+                return False
+
+        return True
