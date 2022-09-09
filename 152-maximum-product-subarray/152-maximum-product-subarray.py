@@ -23,3 +23,5 @@ class Solution:
             print(max_so_far,min_so_far)
             result = max(max_so_far,result)
         return result
+    
+  
