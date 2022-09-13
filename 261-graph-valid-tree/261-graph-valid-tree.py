@@ -1,19 +1,16 @@
 class Solution:
-    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+    def validTree1(self, n: int, edges: List[List[int]]) -> bool:
         #build adjacency list
         #“a tree is an undirected graph in which any two vertices are connected by exactly one path. In other words, any connected graph without simple cycles is a tree.”
-        # all nodes must have atleast 1 indegree except root
-        # there cannot be a cycle
+        # A graph with n nodes has n-1 edges
+        # there cannot be a cycle, if there's a cycle, then no of edges != n-1
+        #undirected graph, hence 0-1 and 1-0
+        #a graph should be fully connected, means no unconnected nodes
         edgemap = collections.defaultdict(list)
-        indegree = [0] * n
         for u,v in edges:
             edgemap[u].append(v)
             edgemap[v].append(u)
-            # indegree[v] += 1
-        print(edgemap,indegree)
-        # if indegree.count(0) > 1:
-        #     return False
-        visited = set()
+        visited = set() #contains the set of visited nodes
         queue = collections.deque([[0]])
         while queue:
             for _ in range(len(queue)):
@@ -23,3 +20,30 @@ class Solution:
                         queue.append(edgemap[child])
                         visited.add(child)
         return True if len(visited) == n and len(edges) == n - 1 else False
+    
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        if len(edges) != n-1:
+            return False
+        g = defaultdict(list)
+        visit = [0]*n
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+        
+        visited = {}
+        def dfs(node, parent):
+            visited[node] = parent
+            
+            for nei in g[node]:
+                if nei in visited:
+                    if parent and nei != parent:
+                        return False
+                else:
+                    if not dfs(nei, node):
+                        return False
+            return True
+            
+            
+        if not dfs(0, None):
+            return False
+        return len(visited) == len(g)
