@@ -23,6 +23,16 @@ class Solution:
         col = cols-1
         for j in range(rows-1):
             atlantic_queue.append((j,col))
+            
+        """
+        for i in range(rows):
+            pacific_queue.append((i, 0))
+            atlantic_queue.append((i, cols - 1))
+        for i in range(cols):
+            pacific_queue.append((0, i))
+            atlantic_queue.append((rows - 1, i))
+        
+        """
         # print(pacific_queue, atlantic_queue)
         dir = [[1,0],[0,1],[-1,0],[0,-1]]
         def bfs(queue):
