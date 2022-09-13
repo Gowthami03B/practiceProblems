@@ -21,7 +21,8 @@ class Solution:
                         visited.add(child)
         return True if len(visited) == n and len(edges) == n - 1 else False
     
-    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+    def validTree2(self, n: int, edges: List[List[int]]) -> bool:
+        #intuition is to do DFS, we need to compare parents, if the parent is not same as child when child in visited, that means the node has 2 different origins
         if len(edges) != n-1:
             return False
         g = defaultdict(list)
@@ -47,3 +48,22 @@ class Solution:
         if not dfs(0, None):
             return False
         return len(visited) == len(g)
+    
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        if len(edges) != n-1:
+            return False
+        g = defaultdict(list)
+        visit = [0]*n
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+        
+        visited = set()
+        def dfs(node):
+            visited.add(node)
+            for child in g[node]:
+                if child not in visited:
+                    dfs(child)
+        
+        dfs(0)
+        return len(visited) == n
