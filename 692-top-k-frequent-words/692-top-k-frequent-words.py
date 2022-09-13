@@ -9,8 +9,9 @@ class Solution:
         #heap takes care of sorting
         for word, freq in wordMap.items():
             heappush(maxheap, (-freq, word))
-            # if len(minheap) > k:#advantage of min heap is O(n logk) and max heap is O(n log n)
-            #     heappop(minheap)
+            # heappush(minheap, (freq, word))
+        #     if len(minheap) > k:#advantage of min heap is O(n logk) and max heap is O(n log n) but here it messes order as these are lexicographically sorted
+        #         heappop(minheap)
         # return [heappop(minheap)[1] for _ in range(k)][::-1]
         #list comprehensions
         return [heappop(maxheap)[1] for _ in range(k)]
