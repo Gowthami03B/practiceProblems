@@ -2,6 +2,7 @@ class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         if not heights or not heights[0]:
             return []
+    
         pacific_queue= deque()
         atlantic_queue=deque()
         
@@ -42,13 +43,13 @@ class Solution:
                 visited.add((r,c))
                 for dr,dc in dir:
                     nr,nc= r+dr,c+dc
-                    if 0<=nr<rows and 0<=nc<cols and (nr,nc) not in visited and heights[nr][nc] >= heights[r][c]:
+                    if 0<=nr<rows and 0<=nc<cols and (nr,nc) not in visited and heights[nr][nc] >= heights[r][c]:#if the inner coordinates are >= the outer, then water can flow from inner to outer, hence add them to queue
                         queue.append((nr,nc))
             return visited
             
         pacific_reachable = bfs(pacific_queue)
         atlantic_reachable = bfs(atlantic_queue)
         
-        return list(pacific_reachable.intersection(atlantic_reachable))
+        return list(pacific_reachable.intersection(atlantic_reachable))#common between pacific and atlantic is the answer
         
                 
