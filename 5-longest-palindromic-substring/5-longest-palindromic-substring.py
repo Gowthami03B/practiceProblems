@@ -34,7 +34,8 @@ class Solution:
         for i in range(n):
             self.expandCenter(s,i,i)
             self.expandCenter(s,i,i+1)
-        return s[self.start : self.start + self.maxVal]
+        print(self.start, self.maxVal)
+        return s[self.start :self.maxVal+self.start]
         
     def expandCenter(self,s,lo,hi):
         while(lo >= 0 and hi < len(s)):
