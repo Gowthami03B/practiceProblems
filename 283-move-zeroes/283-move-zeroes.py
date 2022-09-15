@@ -10,8 +10,7 @@ class Solution:
                 continue
             else:
                 if s != -1:
-                    nums[s] = nums[i]
-                    nums[i] = 0
+                    nums[s],nums[i] = nums[i],0
                     s += 1
                 else:
                     continue
