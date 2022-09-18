@@ -13,8 +13,8 @@ class OrderedStream:
         if self.last_added == idKey - 1 or (self.last_added == -1 and idKey ==1):
             while i+1 in self.stream_set:
                 res.append(self.stream[i+1])
-                self.last_added = i+1
                 i += 1
+            self.last_added = i
         return res
 
 
