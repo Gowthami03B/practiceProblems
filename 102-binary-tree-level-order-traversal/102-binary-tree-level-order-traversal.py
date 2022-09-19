@@ -24,7 +24,7 @@ class Solution:
         return res
     
     #level order traversal with stack
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+    def levelOrder1(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return []
         stack, res = [(root,0)], collections.defaultdict(list)
@@ -37,3 +37,22 @@ class Solution:
                     stack.append((root.left, height + 1))
                 res[height].append(root.val)
         return list(res.values())
+    
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        levels = []
+        def dfs(root,level):
+            if len(levels) == level:
+                levels.append([])
+                levels[level].append(root.val)
+            else:
+                if len(levels[level]) >= 1:
+                    levels[level].append(root.val)
+            if root.left:
+                dfs(root.left, level+1)
+            if root.right:
+                dfs(root.right, level+1)
+            
+        dfs(root, 0)
+        return levels
