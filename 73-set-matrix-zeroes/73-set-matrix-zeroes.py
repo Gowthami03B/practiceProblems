@@ -1,5 +1,6 @@
+from collections import deque
 class Solution:
-    def setZeroes(self, matrix: List[List[int]]) -> None:
+    def setZeroes1(self, matrix: List[List[int]]) -> None:
         isCol = False #to set 1st col to 0's when True
         rows, cols = len(matrix), len(matrix[0])
         for i in range(rows):
@@ -42,3 +43,18 @@ class Solution:
             for j in range(cols):
                 if i in rowsSet or j in colsSet: #say we add [2,2] to set, that means [2,0], [2,1],[0,2],[1,2] must be set to 0 in a 3*3 matrix. that means if i in rowSet or j in colSet, mark matrix[i][j] to 0
                     matrix[i][j] = 0
+                    
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        rows, cols = len(matrix), len(matrix[0])
+        queue = deque()
+        for i in range(rows):
+            for j in range(cols):
+                if matrix[i][j] == 0:
+                    queue.append((i,j))
+        while queue:
+            r,c = queue.popleft()
+            for i in range(cols):
+                matrix[r][i] = 0
+            for j in range(rows):
+                matrix[j][c] = 0
+                
