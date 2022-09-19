@@ -22,7 +22,7 @@ class Solution:
             currNode = parent[letter]
             
             # check if we find a match of word
-            word_match = currNode.pop(WORD_KEY, False)
+            word_match = currNode.pop(WORD_KEY) if WORD_KEY in currNode else False
             if word_match:
                 # also we removed the matched word to avoid duplicates,
                 #   as well as avoiding using set() for results.
@@ -36,7 +36,7 @@ class Solution:
                 newRow, newCol = row + rowOffset, col + colOffset     
                 if newRow < 0 or newRow >= rowNum or newCol < 0 or newCol >= colNum:
                     continue
-                if not board[newRow][newCol] in currNode:#if the letter not in currNode continue, if found backtrack
+                if board[newRow][newCol] not in currNode:#if the letter not in currNode continue, if found backtrack
                     continue
                 backtracking(newRow, newCol, currNode)
         
