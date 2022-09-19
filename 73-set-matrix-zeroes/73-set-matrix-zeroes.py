@@ -54,7 +54,9 @@ class Solution:
         while queue:
             r,c = queue.popleft()
             for i in range(cols):
-                matrix[r][i] = 0
+                if matrix[r][i] != 0:
+                    matrix[r][i] = 0
             for j in range(rows):
-                matrix[j][c] = 0
+                if matrix[j][c] != 0:
+                    matrix[j][c] = 0
                 
