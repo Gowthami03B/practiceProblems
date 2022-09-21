@@ -45,7 +45,7 @@ class Solution:
             newnode.next=ListNode(carry)
         return dummy.next
         
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    def addTwoNumbers2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode(-1)
         newnode= dummy
         carry = 0
@@ -62,3 +62,14 @@ class Solution:
         if carry:
             newnode.next=ListNode(carry)
         return dummy.next
+    
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        sum_num = l1.val+l2.val
+        nodeVal, carry = sum_num%10, sum_num//10
+        newnode = ListNode(nodeVal)
+        if l1.next or l2.next or carry:
+            l1 = l1.next if l1.next else ListNode(0)
+            l2 = l2.next if l2.next else ListNode(0)
+            l1.val += carry
+            newnode.next = self.addTwoNumbers(l1,l2)
+        return newnode
