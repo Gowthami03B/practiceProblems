@@ -2,6 +2,7 @@
 class Solution:
     def decodeString(self, s: str) -> str:
         stack = []
+        temp_string = []
         repeat_string= ""
         final_string=""
         k = ""
