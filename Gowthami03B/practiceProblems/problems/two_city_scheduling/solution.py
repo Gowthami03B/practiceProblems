@@ -1,6 +1,6 @@
 from heapq import heappush,heappop
 class Solution:
-    def twoCitySchedCost1(self, costs: List[List[int]]) -> int:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
             countA, countB, tot_len, total_cost = 0, 0, len(costs)//2, 0
             heap = []
             for cost in costs:
@@ -21,7 +21,7 @@ class Solution:
             total_cost += sum([ele[1][index] for ele in heap])
             return total_cost
         
-    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+    def twoCitySchedCost1(self, costs: List[List[int]]) -> int:
         # we sort and after this we get the lowest costs associated with city A first
         costs.sort(key = lambda x : x[0] - x[1])
         print(costs)
