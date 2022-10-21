@@ -53,7 +53,7 @@ same as above
 Time complexity - addNum - O(1), findMedian - O(100)
 Space - O(101)
 
-class MedianFinder:
+class MedianFinder1:
     def __init__(self):
         self.counter = {i: 0 for i in range(1, 102)} #dictionary
         
@@ -62,7 +62,7 @@ class MedianFinder:
             self.counter[num] += 1
         else:
             self.counter[101] += 1#Bucket sorting. Key=101 is to store the outliner values that greater than 100.
-        print(self.counter)
+        # print(self.counter)
             
     def findMedian(self):
         size = sum(self.counter.values()) #total number of values
@@ -78,13 +78,13 @@ class MedianFinder:
             if count >= k: #if count >= mid value, return i (the median value)
                 return i
 
-obj = MedianFinder()
+obj = MedianFinder1()
+obj.addNum(1)
 obj.addNum(1)
 obj.addNum(2)
-obj.addNum(5)
-obj.addNum(7)
-obj.addNum(10)
-obj.addNum(20)
+obj.addNum(2)
+# obj.addNum(10)
+# obj.addNum(20)
 param_2 = obj.findMedian()
-print(param_2)
-    """
+print("custom question", param_2)
+"""
