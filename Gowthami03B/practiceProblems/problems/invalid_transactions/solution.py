@@ -42,7 +42,8 @@ class Solution:
             self.memo[name] += ((name, int(mi), int(mon), place)),
         return ans
     
-    def invalidTransactions(self, transactions: List[str]) -> List[str]:
+    #O(n log n)
+    def invalidTransactions1(self, transactions: List[str]) -> List[str]:
         if len(transactions) == 1: return transactions
         transactions = sorted(transactions)
         print(transactions)
@@ -63,9 +64,40 @@ class Solution:
                 if city1 != city2 and abs(int(time2) - int(time1)) <= 60:
                     invalid.add(i)
                     invalid.add(j) 
+            
 
         result = []
         for i, transaction in enumerate(transactions): 
             if invalid.__contains__(i):
                 result.append(transaction)
         return result
+    
+    def invalidTransactions(self, transactions: List[str]) -> List[str]:
+        def getAttributes(record):
+            attrs = record.split(',')
+            name = attrs[0]
+            time = int(attrs[1])
+            amount = int(attrs[2])
+            loc = attrs[3]
+            return name, time, amount, loc
+        
+        records = defaultdict(lambda: defaultdict(set))
+        ans = []
+        
+        for t in transactions:
+            name, time, amount, loc = getAttributes(t)
+            records[name][time].add(loc)
+        
+        for t in transactions:
+            name, time, amount, loc = getAttributes(t)
+            if amount > 1000:
+                ans.append(t)
+                continue
+            
+            for i in range(time - 60, time + 61):
+                if name not in records or i not in records[name]:
+                    continue
+                if len(records[name][i]) > 1 or loc not in records[name][i]:
+                    ans.append(t)
+                    break
+        return ans
