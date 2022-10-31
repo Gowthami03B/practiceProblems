@@ -1,5 +1,5 @@
 class Solution:
-    def mergeSpace(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         # Make a copy of the first m elements of nums1.
         nums1_copy = nums1[:m] 
         
@@ -17,7 +17,7 @@ class Solution:
                 nums1[p] = nums2[p2]
                 p2 += 1
                 
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+    def merge1(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         # Set p1 and p2 to point to the end of their respective arrays.
         p1 = m - 1
         p2 = n - 1
