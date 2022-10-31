@@ -1,5 +1,5 @@
 class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreak1(self, s: str, wordDict: List[str]) -> bool:
         word_set =set(wordDict)
         queue = deque()
         visited =set()
@@ -15,3 +15,20 @@ class Solution:
                         return True
             visited.add(index)
         return False#else False
+    
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        word_set = set(wordDict)
+        queue = deque()
+        queue.append(0)
+        visited=set()
+        while queue:
+            index = queue.popleft()
+            if index in visited:
+                continue
+            visited.add(index)
+            for i in range(index+1,len(s)+1):
+                if s[index:i] in word_set:
+                    queue.append(i)
+                    if i == len(s):
+                        return True
+        return False
