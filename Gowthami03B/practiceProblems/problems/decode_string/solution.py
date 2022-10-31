@@ -28,7 +28,7 @@ class Solution:
                 k = ""
         return "".join(stack)
     
-    def decodeString(self, s: str) -> str:
+    def decodeString2(self, s: str) -> str:
         stack = []
         for i in range(len(s)):
             if s[i] != ']':
@@ -52,3 +52,33 @@ class Solution:
                     stack.append(c)
 
         return "".join(stack)
+    
+    def decodeString(self, s: str) -> str:
+        
+        string_st = []  # String Stack- when we find [, push d_str here
+        num_st = []     # Number Stack - when we find [, push k here
+        k = ""#holds the current number
+        d_str = "" #Decoded String, holds current string
+        
+        for ele in s:
+            
+            if ele.isdigit():
+                k = k + ele
+            
+            if ele.isalpha():
+                d_str = d_str + ele
+            
+            if ele == '[':
+                num_st.append(k)      #Push the number k to number stack
+                string_st.append(d_str) # Push the current decoded string to string stack
+                k = "" #reset number string
+                d_str = "" #reset decoded string
+            
+            if ele == ']':
+                k = num_st.pop()  #pop the last number from stack
+                curr_st = string_st.pop()  #pop the current string from stack
+                
+#                 decode current string by appending last decoded string k times
+                d_str = curr_st + (int(k) * d_str)
+                k = "" # reset the number string k
+        return d_str
