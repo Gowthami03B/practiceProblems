@@ -9,6 +9,7 @@ class MyStack:
     def push(self, x: int) -> None:
         self.q1.append(x)
         self.topEle=x
+        print(self.q1[0])
 
     def pop(self) -> int:
         temp = deque()
@@ -25,6 +26,30 @@ class MyStack:
 
     def empty(self) -> bool:
         return False if len(self.q1) > 0 else True
+    
+class MyStack1:
+
+    def __init__(self):
+        self.q = collections.deque()
+        
+
+    def push(self, x: int) -> None:
+        self.q.append(x)
+
+        for _ in range(len(self.q)-1):
+            self.q.append(self.q.popleft())
+        
+
+    def pop(self) -> int:
+        return self.q.popleft()
+        
+
+    def top(self) -> int:
+        return self.q[0]
+        
+
+    def empty(self) -> bool:
+        return not len(self.q)
         
 # Your MyStack object will be instantiated and called as such:
 # obj = MyStack()
