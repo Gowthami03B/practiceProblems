@@ -10,25 +10,25 @@ All employees who didn't use their badge while entering the room - they recorded
 Each collection should contain no duplicates, regardless of how many times a given employee matches the criteria for belonging to it.
 """
 from collections import defaultdict
-def recordEntryExitTimes(records):
-    records_map = defaultdict(list)
-    for name, record in records:
-        records_map[name].append(record)
-    no_exits = set()
-    no_enters = set()
-    print(records_map)
-    for name, times in records_map.items():
-        stack_times = []
-        for time in times:
-            if time == "exit":
-                topEle = stack_times.pop() if stack_times else '#'
-                if topEle != "enter":
-                    no_enters.add(name)
+def enter_exit_records(logs):
+    no_exits, no_enters = set(),set()
+    records = defaultdict(list)
+    for log in logs:
+        records[log[0]].append(log[1])
+    print(records)
+    for employee, times in records.items():
+        for i in range(1,len(times)):
+            if times[i] == 'enter':
+                if times[i-1] != 'exit':
+                    no_exits.add(employee)
             else:
-                stack_times.append(time)
-        if len(stack_times) > 0:
-            no_exits.add(name)
-    print(no_exits, no_enters)
+                if times[i-1]!= 'enter':
+                    no_enters.add(employee)
+        if times[0] == 'exit':
+            no_enters.add(employee)
+        if times[-1] != 'exit':
+            no_exits.add(employee)
+    return list(no_exits),list(no_enters)
 
 records1 = [
 ["Martha", "exit"],
